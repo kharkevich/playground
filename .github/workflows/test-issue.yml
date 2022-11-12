@@ -6,8 +6,8 @@ on:
       - created
 
 jobs:
-  like-pizza:
+  test-job:
     runs-on: ubuntu-latest
     steps:
       - name: Test issue comment
-        run: env
+        uses: kharkevich/playground-action@master
