@@ -17,3 +17,5 @@ jobs:
         uses: kharkevich/playground-action@master
         with:
           repo-token: ${{ secrets.GITHUB_TOKEN }}
+          mode: list
+          approvers: kharkevich
