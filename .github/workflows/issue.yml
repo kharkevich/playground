@@ -14,5 +14,7 @@ jobs:
         - name: test2
           env:
             GITHUB_CONTEXT: ${{ toJson(github) }}
+            ISSUE: ${{ toJson(github.event.issue.number) }}
           run: |
             echo "$GITHUB_CONTEXT"
+            echo "$ISSUE"
