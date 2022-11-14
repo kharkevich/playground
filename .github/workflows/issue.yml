@@ -1,0 +1,13 @@
+name: Issue
+
+on:
+  issues:
+    types: [opened]
+
+jobs:
+  plan:
+    name: Running
+    runs-on: ubuntu-latest
+    steps:
+        - name: name
+          run: env
