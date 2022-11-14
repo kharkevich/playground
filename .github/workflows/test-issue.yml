@@ -13,9 +13,19 @@ jobs:
   test-job:
     runs-on: ubuntu-latest
     steps:
-      - name: Test issue comment
-        uses: kharkevich/playground-action@master
+      - name: Get Approval
+        id: approval
+        uses: kharkevich/issue-ops-approval@v1
         with:
           repo-token: ${{ secrets.GITHUB_TOKEN }}
           mode: list
           approvers: kharkevich
+      - name: Run if approved
+        if: steps.approval.outputs.approved == 'true'
+        run: echo "Approved!"
+      - name: Run if not approved
+        if: steps.approval.outputs.approved == 'false'
+        run: echo "Not approved!"
+      - name: Run if undefined
+        if: steps.approval.outputs.approved == 'undefined'
+        run: echo "Undefined!"
