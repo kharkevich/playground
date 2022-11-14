@@ -11,3 +11,8 @@ jobs:
     steps:
         - name: name
           run: env
+        - name: test2
+          env:
+            GITHUB_CONTEXT: ${{ toJson(github) }}
+          run: |
+            echo "$GITHUB_CONTEXT"
