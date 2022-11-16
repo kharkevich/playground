@@ -33,4 +33,4 @@ jobs:
           issue_id: ${{ inputs.issue_id }}
           fail_on_missing: true
       - name: debug
-        run: echo ${{ fromJson(steps.issue_body_parser_request.outputs.payload) }}
+        run: echo ${{ fromJson(steps.issue_body_parser.outputs.payload) }}
