@@ -1,18 +1,15 @@
 name: Issue
 
 on:
-  issues:
-    types: [opened]
+ workflow_dispatch:
 
 jobs:
   plan:
     name: Running
     runs-on: ubuntu-latest
     steps:
-        - name: name
-          run: env
-        - name: test2
-          env:
-            ISSUE: ${{ github.event.issue.number }}
-          run: |
-            echo "$ISSUE"
+      - name: Propagate deployment to stg environment
+        uses: JasonEtco/create-an-issue@v2
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          ENVIRONMENT: "stg"
