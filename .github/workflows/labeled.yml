@@ -15,7 +15,6 @@ on:
         description: Issue ID
 jobs:
   add-comment:
-    if: github.event.label.name == 'terraform'
     runs-on: ubuntu-latest
     permissions:
       issues: write
