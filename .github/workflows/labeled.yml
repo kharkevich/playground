@@ -1,9 +1,18 @@
 
 name: Add comment
 on:
-  issues:
-    types:
-      - labeled
+  workflow_call:
+    inputs:
+      issue_id:
+        required: true
+        type: string
+        description: Issue ID
+  workflow_dispatch:
+    inputs:
+      issue_id:
+        required: true
+        type: string
+        description: Issue ID
 jobs:
   add-comment:
     if: github.event.label.name == 'terraform'
@@ -14,6 +23,15 @@ jobs:
       - name: Add comment
         uses: peter-evans/create-or-update-comment@a35cf36e5301d70b76f316e867e7788a55a31dae
         with:
-          issue-number: ${{ github.event.issue.number }}
+          issue-number: ${{ inputs.issue_id }}
           body: |
             This issue is available for anyone to work on. **Make sure to reference this issue in your pull request.** :sparkles: Thank you for your contribution! :sparkles:
+      - name: Parse Issue Body
+        uses: peter-murray/issue-body-parser-action@v2
+        id: issue_body_parser
+        with:
+          github_token: ${{ secrets.GITHUB_TOKEN }}
+          issue_id: ${{ inputs.issue_id }}
+          fail_on_missing: true
+      - name: debug
+        run: echo ${{ fromJson(steps.issue_body_parser_request.outputs.payload) }}
