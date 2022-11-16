@@ -1,4 +1,4 @@
-name: Issue
+name: Create Issue
 
 on:
  workflow_dispatch:
@@ -8,6 +8,8 @@ jobs:
     name: Running
     runs-on: ubuntu-latest
     steps:
+      - name: Checkout
+        uses: actions/checkout@v3
       - name: Propagate deployment to stg environment
         uses: JasonEtco/create-an-issue@v2
         env:
